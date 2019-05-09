@@ -11,13 +11,13 @@ int main()
     char encryptedFileName[200];
     char password;
 
-    printf( "1. Dosya Sifrele\n2.Dosya Sifre Coz\n3.Cıkıs\nSecimizi Yapin:" );
+    printf( "1. Dosya Sifrele\n2.Dosya Sifre Coz\n3.Cikis\nSecimizi Yapin:" );
     scanf( "%d" , &selection );
 
     switch ( selection )
     {
     case 1:
-        printf( "Sifrelenecek dosyayi ismini yaziniz" );
+        printf( "Sifrelenecek dosyayi ismini yaziniz:" );
         scanf( "%s" , clearFileName );
         fflush(stdin);
         printf( "Sifreli dosyanin ismini yaziniz:" );
@@ -31,7 +31,7 @@ int main()
         printf( "Sifreli dosyanin ismini yaziniz:" );
         scanf( "%s" , encryptedFileName );
         fflush(stdin);
-        printf( "Sifrelenecek dosyayi ismini yaziniz" );
+        printf( "Sifrelenecek dosyayi ismini yaziniz:" );
         scanf( "%s" , clearFileName );
         fflush(stdin);
         printf( "Sifre giriniz (1-127 arasinda veya tek karakter harf):" );
@@ -52,13 +52,13 @@ void FileEncrypt( char *clearFileName, char *encryptedFileName, char password )
 {
     char temp;
     FILE *clearFile = fopen( clearFileName, "r" );
-    FILE *encryptedFile = fopen( encryptedFileName, "w" );
     if ( clearFile == NULL )
     {
         printf("Sifrelenecek Dosya Acilamadi.\n");
     }
     else
     {
+        FILE *encryptedFile = fopen( encryptedFileName, "w" );
         while( ( temp = fgetc( clearFile )) != EOF )
         {
             fputc( temp + password, encryptedFile );
@@ -74,13 +74,13 @@ void FileDecode( char *encryptedFileName, char *clearFileName,char password )
 {
     char temp;
     FILE *encryptedFile = fopen( encryptedFileName, "r" );
-    FILE *clearFile = fopen( clearFileName, "w" );
     if ( encryptedFile == NULL )
     {
         printf("Sifreli Dosya Acilamadi.\n");
     }
     else
     {
+        FILE *clearFile = fopen( clearFileName, "w" );
         while( ( temp = fgetc( encryptedFile )) != EOF )
         {
             fputc( temp - password, clearFile );
